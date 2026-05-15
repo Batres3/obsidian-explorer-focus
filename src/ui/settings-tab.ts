@@ -98,7 +98,7 @@ export class ExplorerFocusSettingTab extends PluginSettingTab {
 		autoHideGroup.addSetting(setting => {
 			const autoHidePaths = (this.plugin.settings.autoHidePaths ?? []).filter(p => p.trim().length > 0);
 
-			const descFragment = document.createDocumentFragment();
+			const descFragment = activeDocument.createDocumentFragment();
 			descFragment.appendText("These folders are always hidden from the file explorer.");
 
 			if (autoHidePaths.length > 0) {

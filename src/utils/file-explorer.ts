@@ -52,7 +52,7 @@ export function findNavButtonsContainer(fileExplorerView: HTMLElement): HTMLElem
 		let mobileButtonContainer = fileExplorerView.querySelector('.explorer-focus-mobile-buttons') as HTMLElement;
 		if (!mobileButtonContainer) {
 			// Create a mobile button container
-			mobileButtonContainer = document.createElement('div');
+			mobileButtonContainer = activeDocument.createElement('div');
 			mobileButtonContainer.className = 'nav-buttons-container explorer-focus-mobile-buttons';
 			mobileButtonContainer.setCssProps({
 				display: 'flex',
@@ -71,7 +71,7 @@ export function findNavButtonsContainer(fileExplorerView: HTMLElement): HTMLElem
 	// Last resort: create a container at the top of the view
 	let topContainer = fileExplorerView.querySelector('.explorer-focus-mobile-buttons') as HTMLElement;
 	if (!topContainer) {
-		topContainer = document.createElement('div');
+		topContainer = activeDocument.createElement('div');
 		topContainer.className = 'nav-buttons-container explorer-focus-mobile-buttons';
 		topContainer.setCssProps({
 			display: 'flex',
@@ -88,12 +88,12 @@ export function findNavButtonsContainer(fileExplorerView: HTMLElement): HTMLElem
 }
 
 export function createFileExplorerIcon(plugin: ExplorerFocusPlugin): HTMLElement {
-	const icon = document.createElement('div');
+	const icon = activeDocument.createElement('div');
 	icon.className = 'clickable-icon nav-action-button';
 	icon.setAttribute('aria-label', "Toggle focus");
 
 	// Create the focus icon SVG
-	const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+	const svg = activeDocument.createElementNS('http://www.w3.org/2000/svg', 'svg');
 	svg.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
 	svg.setAttribute('width', '24');
 	svg.setAttribute('height', '24');
@@ -106,25 +106,25 @@ export function createFileExplorerIcon(plugin: ExplorerFocusPlugin): HTMLElement
 	svg.setAttribute('class', 'svg-icon lucide-focus');
 	
 	// Lucide focus icon - circle with corner brackets
-	const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+	const circle = activeDocument.createElementNS('http://www.w3.org/2000/svg', 'circle');
 	circle.setAttribute('cx', '12');
 	circle.setAttribute('cy', '12');
 	circle.setAttribute('r', '3');
 	svg.appendChild(circle);
 	
-	const path1 = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+	const path1 = activeDocument.createElementNS('http://www.w3.org/2000/svg', 'path');
 	path1.setAttribute('d', 'M3 7V5a2 2 0 0 1 2-2h2');
 	svg.appendChild(path1);
 	
-	const path2 = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+	const path2 = activeDocument.createElementNS('http://www.w3.org/2000/svg', 'path');
 	path2.setAttribute('d', 'M17 3h2a2 2 0 0 1 2 2v2');
 	svg.appendChild(path2);
 	
-	const path3 = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+	const path3 = activeDocument.createElementNS('http://www.w3.org/2000/svg', 'path');
 	path3.setAttribute('d', 'M21 17v2a2 2 0 0 1-2 2h-2');
 	svg.appendChild(path3);
 	
-	const path4 = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+	const path4 = activeDocument.createElementNS('http://www.w3.org/2000/svg', 'path');
 	path4.setAttribute('d', 'M7 21H5a2 2 0 0 1-2-2v-2');
 	svg.appendChild(path4);
 	

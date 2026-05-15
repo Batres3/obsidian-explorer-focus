@@ -74,7 +74,14 @@ export function patchFileExplorer(plugin: ExplorerFocusPlugin): void {
 	// Patch the prototype only once (affects all instances)
 	if (!prototypePatched) {
 		try {
-			const prototype = Object.getPrototypeOf(fileExplorer);
+			// `Object.getPrototypeOf` returns `any`; narrow it to the shape
+			// `monkey-around`'s `around()` expects so the no-unsafe-* rules
+			// don't fire on the .getSortedFolderItems access below. The
+			// runtime `typeof` check immediately afterward validates the
+			// type assertion before we use it.
+			const prototype = Object.getPrototypeOf(fileExplorer) as {
+				getSortedFolderItems: GetSortedFolderItemsFunction;
+			};
 
 			// Verify the method we're patching exists
 			if (typeof prototype.getSortedFolderItems !== 'function') {

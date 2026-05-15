@@ -80,7 +80,7 @@ export class ExplorerFocusPlugin extends Plugin {
 		
 		// Force refresh by manually updating visibility (especially important on mobile)
 		// Use setTimeout to ensure DOM is ready after requestSort
-		setTimeout(() => {
+		window.setTimeout(() => {
 			fileExplorers.forEach(fileExplorer => {
 				this.refreshFileExplorerVisibility(fileExplorer);
 			});
@@ -116,7 +116,7 @@ export class ExplorerFocusPlugin extends Plugin {
 
 		// Force refresh by manually updating visibility (especially important on mobile)
 		// Use setTimeout to ensure DOM is ready after requestSort
-		setTimeout(() => {
+		window.setTimeout(() => {
 			fileExplorers.forEach(fileExplorer => {
 				this.refreshFileExplorerVisibility(fileExplorer);
 			});
@@ -304,7 +304,7 @@ export class ExplorerFocusPlugin extends Plugin {
 					evt.stopPropagation();
 					handleIconClick();
 					// Reset flag after a short delay
-					setTimeout(() => { touchHandled = false; }, 300);
+					window.setTimeout(() => { touchHandled = false; }, 300);
 				});
 
 				this.registerDomEvent(this.fileExplorerIcon, 'click', (evt) => {
