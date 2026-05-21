@@ -34,18 +34,16 @@ The toggle command uses the focus level setting to determine what to focus on. T
 
 ## Installation
 
-### Manual Installation
+### Community Plugins Search
 
-1. Download the latest release
-2. Extract the files to your vault's `.obsidian/plugins/explorer-focus/` folder
-3. Reload Obsidian
-4. Enable the plugin in Settings → Community plugins
+1. In Obsidian, go to Settings > Community plugins (enable it if you haven't already).
+2. Search for [Explorer Focus](https://obsidian.md/plugins?id=explorer-focus) and click Install and then Enable.
 
-### Using BRAT
+### Manual
 
-1. Install [BRAT](https://github.com/TfTHacker/obsidian42-brat)
-2. Add this repository to BRAT
-3. Enable the plugin in Settings → Community plugins
+1. Download the latest release from the [Releases page](https://github.com/davidvkimball/obsidian-explorer-focus/releases) and navigate to your Obsidian vault's `.obsidian/plugins/` directory.
+2. Create a new folder called `explorer-focus` and ensure `manifest.json`, `main.js`, and `styles.css` are in there.
+3. In Obsidian, go to Settings > Community plugins (enable it if you haven't already) and then enable "Explorer Focus."
 
 ### Development
 
