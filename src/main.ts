@@ -109,6 +109,9 @@ export class ExplorerFocusPlugin extends Plugin {
 		// Update CSS classes
 		this.updateFocusModeClasses();
 
+		// Set folder creation path
+		this.setNoteCreationFolder();
+
 		// Trigger file explorer refresh on all file explorer instances
 		const fileExplorers = getAllFileExplorers(this);
 		fileExplorers.forEach(fileExplorer => {
@@ -411,7 +414,7 @@ export class ExplorerFocusPlugin extends Plugin {
 	}
 
 	setNoteCreationFolder() {
-		if (!this.settings.defaultFileCreationPath) { return; }
+		if (!this.settings.enableFileCreation) { return; }
 		if (this.app.vault.getConfig("newFileLocation") !== "folder") { return; }
 		if (this.isFocus) {
 			this.app.vault.setConfig("newFileFolderPath", this.focusedPath)

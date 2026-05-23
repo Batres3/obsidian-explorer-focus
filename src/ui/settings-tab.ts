@@ -124,6 +124,18 @@ export class ExplorerFocusSettingTab extends PluginSettingTab {
 			.setHeading("File creation");
 
 		fileCreationGroup.addSetting(setting => {
+			setting
+				.setName("Enable file creation in focused folder")
+				.addToggle(toggle => toggle
+					.setValue(this.plugin.settings.enableFileCreation)
+					.onChange(async value => {
+						this.plugin.settings.enableFileCreation = value;
+						this.plugin.setNoteCreationFolder();
+						await this.plugin.saveSettings();
+					}));
+		});
+
+		fileCreationGroup.addSetting(setting => {
 			const descFragment = activeDocument.createDocumentFragment();
 			descFragment.appendText("This is the folder used to create files when no folder is focused");
 
@@ -137,6 +149,7 @@ export class ExplorerFocusSettingTab extends PluginSettingTab {
 						.setValue(this.plugin.settings.defaultFileCreationPath)
 						.onChange(async value => {
 							this.plugin.settings.defaultFileCreationPath = value;
+							this.plugin.setNoteCreationFolder();
 							await this.plugin.saveSettings();
 						});
 				});
