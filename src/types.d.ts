@@ -29,8 +29,8 @@ declare module "obsidian" {
 			childTop: number;
 			computed: boolean;
 			height: number;
-			/** 
-			 * Critical property: if true, Obsidian's virtual list will skip 
+			/**
+			 * Critical property: if true, Obsidian's virtual list will skip
 			 * rendering this item and its children.
 			 */
 			hidden: boolean;
@@ -62,7 +62,7 @@ declare module "obsidian" {
 		/** Internal flag to track if our focus patches have been applied */
 		fileExplorerPlusPatched?: boolean;
 
-		/** 
+		/**
 		 * Map of all file items indexed by their vault path.
 		 * Used for direct DOM manipulation and visibility updates.
 		 */
@@ -70,5 +70,10 @@ declare module "obsidian" {
 			[key: string]: PathVirtualElement;
 		};
 	}
+
+	export interface Vault {
+        getConfig(key: string): unknown;
+        setConfig(key: string, value: any): void;
+    }
 }
 
