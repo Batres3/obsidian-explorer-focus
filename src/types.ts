@@ -5,6 +5,7 @@ export interface ExplorerFocusSettings {
 	customFolderPath: string;
 	hideAncestorFolders: boolean;
 	autoHidePaths: string[];
+	defaultFileCreationPath: string;
 }
 
 export const DEFAULT_SETTINGS: ExplorerFocusSettings = {
@@ -13,6 +14,7 @@ export const DEFAULT_SETTINGS: ExplorerFocusSettings = {
 	focusLevel: 'parent',
 	customFolderPath: '',
 	hideAncestorFolders: false,
-	autoHidePaths: []
+	autoHidePaths: [],
+	defaultFileCreationPath: ''
 };
 

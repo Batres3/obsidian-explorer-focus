@@ -120,6 +120,28 @@ export class ExplorerFocusSettingTab extends PluginSettingTab {
 					}));
 		});
 
+		const fileCreationGroup = new SettingGroup(containerEl)
+			.setHeading("File creation");
+
+		fileCreationGroup.addSetting(setting => {
+			const descFragment = activeDocument.createDocumentFragment();
+			descFragment.appendText("This is the folder used to create files when no folder is focused");
+
+			setting
+				.setName("Default creation folder")
+				.setDesc(descFragment)
+				.addText(text => {
+					new FolderSuggest(this.app, text.inputEl);
+					text
+						.setPlaceholder('Folder/subfolder')
+						.setValue(this.plugin.settings.defaultFileCreationPath)
+						.onChange(async value => {
+							this.plugin.settings.defaultFileCreationPath = value;
+							await this.plugin.saveSettings();
+						});
+				});
+		});
+
 	}
 }
 

@@ -63,13 +63,16 @@ export class ExplorerFocusPlugin extends Plugin {
 	enterFocus(path: string) {
 		this.isFocus = true;
 		this.focusedPath = path;
-		
+
 		// Update icon if it exists
 		this.updateFileExplorerIcon();
-		
+
 		// Update CSS classes
 		this.updateFocusModeClasses();
-		
+
+		// Set folder creation path
+		this.setNoteCreationFolder();
+
 		// Trigger file explorer refresh on all file explorer instances
 		const fileExplorers = getAllFileExplorers(this);
 		fileExplorers.forEach(fileExplorer => {
@@ -77,7 +80,7 @@ export class ExplorerFocusPlugin extends Plugin {
 				fileExplorer.requestSort();
 			}
 		});
-		
+
 		// Force refresh by manually updating visibility (especially important on mobile)
 		// Use setTimeout to ensure DOM is ready after requestSort
 		window.setTimeout(() => {
@@ -271,7 +274,7 @@ export class ExplorerFocusPlugin extends Plugin {
 
 			const fileExplorerView = fileExplorerLeaves[0].view.containerEl;
 			const navButtonsContainer = findNavButtonsContainer(fileExplorerView);
-			
+
 			if (!navButtonsContainer) {
 				return;
 			}
@@ -297,7 +300,7 @@ export class ExplorerFocusPlugin extends Plugin {
 				// Use a unified handler that works for both click and touch
 				// On mobile, touch events typically trigger click, but we handle both to be safe
 				let touchHandled = false;
-				
+
 				this.registerDomEvent(this.fileExplorerIcon, 'touchstart', (evt) => {
 					touchHandled = true;
 					evt.preventDefault();
@@ -319,7 +322,7 @@ export class ExplorerFocusPlugin extends Plugin {
 					handleIconClick();
 				});
 			}
-			
+
 			// Set/update icon
 			this.updateFileExplorerIcon();
 
@@ -359,7 +362,7 @@ export class ExplorerFocusPlugin extends Plugin {
 			if (fileExplorerLeaves.length > 0) {
 				const fileExplorerView = fileExplorerLeaves[0].view.containerEl;
 				const navButtonsContainer = findNavButtonsContainer(fileExplorerView);
-				
+
 				if (navButtonsContainer) {
 					insertFileExplorerIcon(this.fileExplorerIcon, navButtonsContainer);
 				}
@@ -405,6 +408,16 @@ export class ExplorerFocusPlugin extends Plugin {
 				}
 			}
 		});
+	}
+
+	setNoteCreationFolder() {
+		if (!this.settings.defaultFileCreationPath) { return; }
+		if (this.app.vault.getConfig("newFileLocation") !== "folder") { return; }
+		if (this.isFocus) {
+			this.app.vault.setConfig("newFileFolderPath", this.focusedPath)
+		} else {
+			this.app.vault.setConfig("newFileFolderPath", this.settings.defaultFileCreationPath)
+		}
 	}
 
 	onunload() {
